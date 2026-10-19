@@ -1,0 +1,13 @@
+{
+  "name": "Ders Takip - Özel Ders Yönetimi",
+  "short_name": "Ders Takip",
+  "description": "Öğrenci, ders, müfredat, ödev ve LGS deneme takip uygulaması.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6f5fb",
+  "theme_color": "#5b4bdb",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png"}
+  ]
+}

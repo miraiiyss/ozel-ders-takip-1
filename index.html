@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#5b4bdb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Ders Takip">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Ders Takip</title>
+<style>
+:root{--bg:#f6f5fb;--card:#fff;--ink:#222137;--muted:#77758b;--line:#e8e6f1;--accent:#5b4bdb;--soft:#eeebff;--green:#21865a;--red:#c74d5b;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:calc(82px + env(safe-area-inset-bottom))}
+header{padding:22px 18px 14px;background:linear-gradient(135deg,#5b4bdb,#8a65e8);color:white;border-radius:0 0 26px 26px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:22px;font-weight:800;letter-spacing:-.5px}.subtitle{font-size:12px;opacity:.85;margin-top:4px}.header-stat{margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#ffffff22;border:1px solid #ffffff30;border-radius:14px;padding:12px 10px}.stat b{display:block;font-size:22px}.stat span{font-size:11px;opacity:.9}
+main{max-width:780px;margin:0 auto;padding:16px}.page{display:none}.page.active{display:block}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:5px 0 14px}.section-head h2{font-size:20px;margin:0;letter-spacing:-.4px}.muted{color:var(--muted);font-size:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:15px;margin-bottom:12px;box-shadow:0 4px 14px #28204a05}.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}.grow{flex:1;min-width:0}.avatar{width:44px;height:44px;border-radius:14px;background:var(--soft);color:var(--accent);display:grid;place-items:center;font-weight:800;font-size:16px;flex-shrink:0}.student-name{font-weight:750;font-size:16px}.pill{display:inline-block;background:var(--soft);color:var(--accent);font-size:11px;padding:5px 9px;border-radius:99px;margin-top:5px}.btn{border:0;background:var(--accent);color:#fff;border-radius:12px;padding:11px 14px;font-weight:700;font-size:13px;cursor:pointer}.btn.secondary{background:var(--soft);color:var(--accent)}.btn.ghost{background:transparent;color:var(--muted);padding:8px}.btn.danger{background:#fff0f1;color:var(--red)}.btn.small{padding:8px 10px;font-size:12px}.btn.full{width:100%}.empty{text-align:center;padding:30px 16px;color:var(--muted)}.empty .emoji{font-size:34px;margin-bottom:8px}
+nav{position:fixed;z-index:5;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(14px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));max-width:780px;margin:auto}nav button{border:0;background:transparent;color:var(--muted);font-size:10px;padding:6px 2px;display:grid;gap:4px;justify-items:center;cursor:pointer}nav button .ico{font-size:20px}nav button.active{color:var(--accent);font-weight:800}
+input,select,textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:11px 12px;font:inherit;background:#fff;color:var(--ink);outline-color:var(--accent)}textarea{min-height:76px;resize:vertical}label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin:0 0 6px}.field{margin-bottom:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.formgrid .field{margin:0}.form-actions{display:flex;gap:8px;margin-top:14px}.form-actions>*{flex:1}.hidden{display:none!important}.chips{display:flex;gap:7px;overflow:auto;padding:2px 0 12px}.chip{white-space:nowrap;border:1px solid var(--line);border-radius:99px;background:#fff;padding:8px 12px;font-size:12px;color:var(--muted)}.chip.active{background:var(--soft);color:var(--accent);border-color:#d8d1ff;font-weight:700}.metricgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.metric{background:#faf9ff;border-radius:14px;padding:12px}.metric b{font-size:22px;display:block}.metric span{font-size:11px;color:var(--muted)}.progress{height:7px;background:#eeedf5;border-radius:9px;overflow:hidden;margin-top:9px}.progress i{height:100%;display:block;background:var(--accent);border-radius:9px}.itemline{padding:12px 0;border-bottom:1px solid var(--line)}.itemline:last-child{border-bottom:0}.itemtitle{font-weight:700}.badge{font-size:10px;padding:4px 7px;border-radius:7px;background:#f1f0f7;color:var(--muted)}.badge.good{background:#e7f7ef;color:var(--green)}.badge.bad{background:#fff0f1;color:var(--red)}.chart{width:100%;height:190px;display:block}.smalltext{font-size:12px;color:var(--muted);line-height:1.5}.back{margin-bottom:10px}.notice{background:#fff8e5;color:#755b16;border-radius:12px;padding:12px;font-size:12px;line-height:1.5;margin-bottom:12px}.toast{position:fixed;bottom:95px;left:50%;transform:translateX(-50%);background:#27243a;color:#fff;padding:11px 16px;border-radius:12px;font-size:12px;z-index:20;box-shadow:0 8px 24px #0002;max-width:90%;text-align:center}.inline-actions{display:flex;gap:6px;flex-wrap:wrap}.exam-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.exam-grid .field{margin:0}.exam-grid input{padding:9px 7px;font-size:13px}.exam-grid label{font-size:11px}.net-total{background:var(--soft);border-radius:12px;padding:12px;text-align:center;margin:12px 0}.net-total b{font-size:26px;color:var(--accent)}.topspace{margin-top:14px}
+@media(min-width:600px){header{padding:26px 26px 18px}main{padding:22px}.student-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.student-grid .card{margin-bottom:0}.metricgrid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<header>
+ <div class="topline"><div><div class="brand">Ders Takip</div><div class="subtitle">Özel derslerin, tek yerde.</div></div><button class="btn secondary small" id="notifyBtn">🔔 Bildirimleri aç</button></div>
+ <div class="header-stat"><div class="stat"><b id="statStudents">0</b><span>Öğrenci</span></div><div class="stat"><b id="statLessons">0</b><span>Toplam ders</span></div><div class="stat"><b id="statUpcoming">0</b><span>Yaklaşan ders</span></div></div>
+</header>
+<main>
+<section class="page active" id="page-home">
+ <div class="section-head"><h2>Bugün</h2><span id="todayLabel" class="muted"></span></div>
+ <div id="todayLessons"></div>
+ <div class="section-head topspace"><h2>Öğrenciler</h2><button class="btn small" onclick="openStudentForm()">＋ Öğrenci ekle</button></div>
+ <div id="homeStudents"></div>
+</section>
+<section class="page" id="page-students">
+ <div class="section-head"><h2>Öğrencilerim</h2><button class="btn small" onclick="openStudentForm()">＋ Ekle</button></div>
+ <div class="field"><input id="studentSearch" placeholder="Öğrenci ara..." oninput="renderStudents()"></div>
+ <div id="studentsList"></div>
+</section>
+<section class="page" id="page-calendar">
+ <div class="section-head"><h2>Ders takvimi</h2><button class="btn small" onclick="openScheduleForm()">＋ Ders ekle</button></div>
+ <div class="notice">Düzenli dersler haftalık tekrar eder; telafi dersleri yalnızca seçtiğin tarihte görünür. Bildirimler, cihaz ve tarayıcı izinlerine bağlıdır.</div>
+ <div id="calendarList"></div>
+</section>
+<section class="page" id="page-reports">
+ <div class="section-head"><h2>Genel analiz</h2></div>
+ <div id="reportContent"></div>
+ <div class="card topspace"><div class="itemtitle">Veri yedekleme</div><p class="smalltext">Bilgilerin bu cihazdaki tarayıcıda tutulur. Tarayıcı verilerini temizlemek kayıtları silebilir. Düzenli yedek al.</p><div class="inline-actions"><button class="btn secondary" onclick="exportData()">Yedeği indir</button><label class="btn secondary" style="margin:0;cursor:pointer">Yedek yükle<input type="file" accept="application/json" class="hidden" onchange="importData(event)"></label></div></div>
+</section>
+<section class="page" id="page-student">
+ <button class="btn ghost back" onclick="showPage('students')">← Öğrencilere dön</button>
+ <div id="studentDetail"></div>
+</section>
+<section class="page" id="page-studentform">
+ <div class="section-head"><h2 id="studentFormTitle">Yeni öğrenci</h2><button class="btn ghost" onclick="showPage('students')">Vazgeç</button></div>
+ <form id="studentForm">
+ <input type="hidden" id="editStudentId">
+ <div class="formgrid"><div class="field"><label>Ad</label><input id="firstName" required></div><div class="field"><label>Soyad</label><input id="lastName" required></div></div>
+ <div class="field"><label>Veli adı soyadı</label><input id="parentName"></div>
+ <div class="field"><label>Veli telefonu</label><input id="parentPhone" type="tel" placeholder="05xx xxx xx xx"></div>
+ <div class="field"><label>Sınıf</label><select id="grade"><option value="4">4. sınıf</option><option value="5">5. sınıf</option><option value="6">6. sınıf</option><option value="7">7. sınıf</option><option value="8">8. sınıf</option></select></div>
+ <div class="field"><label>Öğrenci hakkında not</label><textarea id="studentNotes" placeholder="Hedefler, ihtiyaçlar, dikkat edilecek noktalar..."></textarea></div>
+ <div class="form-actions"><button type="button" class="btn secondary" onclick="showPage('students')">İptal</button><button class="btn">Kaydet</button></div>
+ </form>
+</section>
+<section class="page" id="page-lessonform">
+ <div class="section-head"><h2>Ders kaydı</h2><button class="btn ghost" onclick="backToDetail()">Vazgeç</button></div>
+ <form id="lessonForm">
+ <input type="hidden" id="lessonStudentId">
+ <div class="field"><label>Tarih ve saat</label><input id="lessonDate" type="datetime-local" required></div>
+ <div class="field"><label>İşlenen konu</label><select id="lessonTopic"></select></div>
+ <div class="field"><label>Konu değerlendirmesi</label><select id="lessonRating"><option value="İyi">İyi</option><option value="Geliştirilmeli">Geliştirilmeli</option><option value="Tekrar edilmeli">Tekrar edilmeli</option><option value="İşlenmedi">İşlenmedi</option></select></div>
+ <div class="field"><label>Ödev durumu</label><select id="lessonHomework"><option value="Ödev yoktu">Ödev yoktu</option><option value="Tamamlandı">Verildi ve tamamlandı</option><option value="Kısmen tamamlandı">Kısmen tamamlandı</option><option value="Tamamlanmadı">Tamamlanmadı</option></select></div>
+ <div class="field"><label>Yeni ödev / sonraki derse not</label><textarea id="lessonNextHomework"></textarea></div>
+ <div class="field"><label>Ders notu</label><textarea id="lessonNotes" placeholder="Dersin özeti, güçlü ve geliştirilmesi gereken yönler..."></textarea></div>
+ <button class="btn full">Ders kaydını kaydet</button>
+ </form>
+</section>
+<section class="page" id="page-scheduleform">
+ <div class="section-head"><h2 id="scheduleFormTitle">Ders planla</h2><button class="btn ghost" onclick="showPage('calendar')">Vazgeç</button></div>
+ <form id="scheduleForm">
+ <div class="field"><label>Öğrenci</label><select id="scheduleStudent" required></select></div>
+ <div class="field"><label>Ders türü</label><select id="scheduleType" onchange="toggleScheduleType()"><option value="weekly">Düzenli haftalık ders</option><option value="once">Tek seferlik / telafi dersi</option></select></div>
+ <div class="field" id="weekdayField"><label>Haftanın günü</label><select id="scheduleWeekday"><option value="1">Pazartesi</option><option value="2">Salı</option><option value="3">Çarşamba</option><option value="4">Perşembe</option><option value="5">Cuma</option><option value="6">Cumartesi</option><option value="0">Pazar</option></select></div>
+ <div class="field" id="dateField"><label>Tarih</label><input id="scheduleDate" type="date"></div>
+ <div class="formgrid"><div class="field"><label>Saat</label><input id="scheduleTime" type="time" value="17:00" required></div><div class="field"><label>Süre (dk)</label><input id="scheduleDuration" type="number" min="15" step="15" value="60" required></div></div>
+ <div class="field"><label>Hatırlatma</label><select id="scheduleReminder"><option value="30">30 dakika önce</option><option value="60">1 saat önce</option><option value="0">Hatırlatma yok</option></select></div>
+ <div class="field"><label>Not</label><input id="scheduleNotes" placeholder="Örn. telafi / online ders"></div>
+ <button class="btn full">Takvime kaydet</button>
+ </form>
+</section>
+<section class="page" id="page-examform">
+ <div class="section-head"><h2>Deneme sonucu ekle</h2><button class="btn ghost" onclick="backToDetail()">Vazgeç</button></div>
+ <form id="examForm">
+ <input type="hidden" id="examStudentId">
+ <div class="field"><label>Deneme adı</label><input id="examName" placeholder="Örn. Türkiye geneli deneme" required></div>
+ <div class="field"><label>Tarih</label><input id="examDate" type="date" required></div>
+ <div id="examSubjects"></div>
+ <div class="net-total">Toplam net <br><b id="examTotal">0,00</b></div>
+ <button class="btn full">Denemeyi kaydet</button>
+ </form>
+</section>
+</main>
+<nav>
+ <button class="active" data-page="home" onclick="showPage('home')"><span class="ico">⌂</span>Ana sayfa</button>
+ <button data-page="students" onclick="showPage('students')"><span class="ico">♙</span>Öğrenciler</button>
+ <button data-page="calendar" onclick="showPage('calendar')"><span class="ico">▦</span>Takvim</button>
+ <button data-page="reports" onclick="showPage('reports')"><span class="ico">▥</span>Analiz</button>
+</nav>
+<div id="toast" class="toast hidden"></div>
+<script>
+const KEY='dersTakip_v1';
+const SUBJECTS=['Türkçe','Matematik','Fen Bilimleri','İnkılap Tarihi','Din Kültürü','İngilizce'];
+const WEEKDAYS=['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
+const DEFAULT_TOPICS={
+'4':[
+'1. Tema: Sayılar ve Nicelikler (1) — Sayıların temsilleri ve okunup yazılması (MAT.4.1.1)',
+'1. Tema: Sayılar ve Nicelikler (1) — Altı basamağa kadar sayıları çözümleme; basamak ve bölükler (MAT.4.1.2)',
+'1. Tema: Sayılar ve Nicelikler (1) — Sayıları karşılaştırma, sıralama ve yuvarlama (MAT.4.1.3)',
+'1. Tema: Sayılar ve Nicelikler (1) — İleriye ve geriye ritmik sayma (MAT.4.1.4)',
+'1. Tema: Sayılar ve Nicelikler (1) — Artan/azalan sayı ve şekil örüntüleri (MAT.4.1.5)',
+'2. Tema: Sayılar ve Nicelikler (2) — Basit, bileşik ve tam sayılı kesirler (MAT.4.1.6)',
+'2. Tema: Sayılar ve Nicelikler (2) — Denk kesirler (MAT.4.1.7)',
+'2. Tema: Sayılar ve Nicelikler (2) — Birim kesirleri karşılaştırma (MAT.4.1.8)',
+'2. Tema: Sayılar ve Nicelikler (2) — Paydaları eşit kesirleri karşılaştırma (MAT.4.1.9)',
+'2. Tema: Sayılar ve Nicelikler (2) — Bir çokluğun basit kesir kadarını ve bütününü bulma (MAT.4.1.10)',
+'2. Tema: Sayılar ve Nicelikler (2) — Paydaları eşit kesirlerle toplama ve çıkarma (MAT.4.1.11)',
+'2. Tema: Sayılar ve Nicelikler (2) — Kesirlerle toplama/çıkarma problemleri (MAT.4.1.12)',
+'2. Tema: Sayılar ve Nicelikler (2) — Uzunluk ve kütle ölçü birimlerini dönüştürme (MAT.4.1.13)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Zihinden toplama ve çıkarma (MAT.4.2.1)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Dört basamağa kadar sayılarla toplama ve çıkarma (MAT.4.2.2)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Çarpma ve bölme sonucunu tahmin etme (MAT.4.2.3)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Çarpma ve bölmede zihinden işlem ve kısa yollar (MAT.4.2.4)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Çarpma ve bölme işlemleri arasındaki ilişki (MAT.4.2.5)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Dört işlem içeren yönergeler oluşturma ve yorumlama (MAT.4.2.6)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Dört işlem gerektiren problemleri çözme (MAT.4.2.7)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Dört işlem gerektiren problem durumları oluşturma (MAT.4.2.8)',
+'3. Tema: İşlemlerden Cebirsel Düşünmeye — Dört işlem bağlamında eşitlik (MAT.4.2.9)',
+'4. Tema: Nesnelerin Geometrisi (1) — Geometrik cisimlerin açınımları (MAT.4.3.1)',
+'4. Tema: Nesnelerin Geometrisi (1) — Üçgen, kare ve dikdörtgenin kenar ve köşeleri (MAT.4.3.2)',
+'4. Tema: Nesnelerin Geometrisi (1) — Geometrik şekillerin çevre uzunluğu (MAT.4.3.3)',
+'4. Tema: Nesnelerin Geometrisi (1) — Standart olmayan birimlerle alanı tahmin etme (MAT.4.3.4)',
+'5. Tema: Nesnelerin Geometrisi (2) — Açıyı dönme miktarı olarak yorumlama (MAT.4.3.5)',
+'5. Tema: Nesnelerin Geometrisi (2) — Açı ölçüm araçlarının gerekliliği (MAT.4.3.6)',
+'5. Tema: Nesnelerin Geometrisi (2) — Dik açıya göre dar ve geniş açı (MAT.4.3.7)',
+'6. Tema: Nesnelerin Geometrisi (3) — Doğruya göre simetriyi yorumlama (MAT.4.3.8)',
+'6. Tema: Nesnelerin Geometrisi (3) — Bir şeklin doğruya göre simetrisini oluşturma (MAT.4.3.9)',
+'6. Tema: Nesnelerin Geometrisi (3) — Geometrik şekillerle yapı kurmak için kodlama stratejileri (MAT.4.3.10)',
+'7. Tema: Olayların Olasılığı ve Veriye Dayalı Araştırma — Olasılığı imkânsız, olabilir ve kesin olarak ifade etme (MAT.4.4.1)',
+'7. Tema: Olayların Olasılığı ve Veriye Dayalı Araştırma — Kategorik/nicel veriyle araştırma yapma ve veriye dayalı karar verme (MAT.4.4.2)'
+],
+'5':['Doğal sayılar ve işlemler','Kesirler','Ondalık gösterimler','Yüzdeler','Temel geometrik kavramlar','Veri işleme','Uzunluk ve zaman ölçme'],
+'6':[
+'1. Tema: Sayılar ve Nicelikler (1) — Doğal sayıların çarpanları ve katları (MAT.6.1.1)',
+'1. Tema: Sayılar ve Nicelikler (1) — 2, 3, 4, 5, 6, 9 ve 10 ile bölünebilme kriterleri (MAT.6.1.2)',
+'1. Tema: Sayılar ve Nicelikler (1) — Asal sayılar ve asal çarpanlar (MAT.6.1.3)',
+'1. Tema: Sayılar ve Nicelikler (1) — Ortak katlar ve ortak bölenler (MAT.6.1.4)',
+'1. Tema: Sayılar ve Nicelikler (2) — Ondalık gösterimlerde basamak değerleri (MAT.6.1.5)',
+'1. Tema: Sayılar ve Nicelikler (2) — Kesir ve bölme işlemi arasındaki ilişki; sonlu ve devirli ondalık gösterimler (MAT.6.1.6)',
+'1. Tema: Sayılar ve Nicelikler (2) — Kesir, ondalık ve yüzde gösterimleriyle dört işlem problemleri (MAT.6.1.7)',
+'1. Tema: Sayılar ve Nicelikler (2) — Standart uzunluk ölçme birimleri (MAT.6.1.8)',
+'2. Tema: İşlemlerle Cebirsel Düşünme ve Değişimler — Bilinen ve bilinmeyen nicelikler; cebirsel ifadeler (MAT.6.2.1)',
+'2. Tema: İşlemlerle Cebirsel Düşünme ve Değişimler — Sayı ve şekil örüntüleri (MAT.6.2.2)',
+'2. Tema: İşlemlerle Cebirsel Düşünme ve Değişimler — Cebirsel ifadeler içeren algoritmalar (MAT.6.2.3)',
+'3. Tema: Geometrik Şekiller — Paralel doğrular ve kesenle oluşan açılar (MAT.6.3.1)',
+'3. Tema: Geometrik Şekiller — İki paralel doğru ve iki kesenle oluşan şekillerin özellikleri (MAT.6.3.2)',
+'3. Tema: Geometrik Şekiller — Köşegenleri birbirini ortalayan dörtgenler (MAT.6.3.3)',
+'3. Tema: Geometrik Şekiller — Üçgen ve dörtgenlerde açılarla ilgili problemler (MAT.6.3.4)',
+'4. Tema: Geometrik Nicelikler — Uzunluk ve alan ölçme birimleri arasındaki ilişkiler (MAT.6.4.1)',
+'4. Tema: Geometrik Nicelikler — Dikdörtgenden hareketle paralelkenar ve üçgenin alanı (MAT.6.4.2)',
+'4. Tema: Geometrik Nicelikler — Geometrik şekillerin alanlarıyla ilgili gerçek yaşam problemleri (MAT.6.4.3)',
+'4. Tema: Geometrik Nicelikler — Çemberin uzunluğu, çap ve pi sayısı (MAT.6.4.4)',
+'4. Tema: Geometrik Nicelikler — Çemberde merkez açı ve gördüğü yay uzunluğu arasındaki ilişki (MAT.6.4.5)',
+'5. Tema: İstatistiksel Araştırma Süreci — Kategorik ve nicel (kesikli) verilerle araştırma yapma (MAT.6.5.1)',
+'5. Tema: İstatistiksel Araştırma Süreci — Veriye dayalı istatistiksel sonuçları ve yorumları tartışma (MAT.6.5.2)',
+'6. Tema: Veriden Olasılığa — Deneysel olasılık ve göreli sıklık (MAT.6.6.1)'
+],
+'7':['Tam sayılarla işlemler','Rasyonel sayılar','Rasyonel sayılarla işlemler','Cebirsel ifadeler','Eşitlik ve denklem','Oran ve orantı','Yüzdeler','Doğrular ve açılar','Çokgenler','Çember ve daire','Veri analizi'],
+'8':[
+'1. Tema: Sayılar ve Nicelikler — Üslü ifadeler ve özellikleriyle işlemler (MAT.8.1.1)',
+'1. Tema: Sayılar ve Nicelikler — Kareköklü ifadeler ve yaklaşık değerleri (MAT.8.1.2)',
+'1. Tema: Sayılar ve Nicelikler — Rasyonel ve irrasyonel sayılar (MAT.8.1.3)',
+'1. Tema: Sayılar ve Nicelikler — Gerçek sayılar ve sayı aralıkları (MAT.8.1.4)',
+'2. Tema: Cebirsel Düşünme ve Değişimler — Dik koordinat sistemi ve sıralı ikililer (MAT.8.2.1)',
+'2. Tema: Cebirsel Düşünme ve Değişimler — Doğrusal ilişkiler ve doğrusal fonksiyonlar (MAT.8.2.2)',
+'2. Tema: Cebirsel Düşünme ve Değişimler — Doğrusal fonksiyonların grafikleri, eğim ve doğruların konumları (MAT.8.2.3)',
+'2. Tema: Cebirsel Düşünme ve Değişimler — Doğrusal fonksiyon problemleri ve algoritmalar (MAT.8.2.4)',
+'3. Tema: Geometrik Şekiller — Üçgende kenar-açı ilişkisi (MAT.8.3.1)',
+'3. Tema: Geometrik Şekiller — Üçgen eşitsizliği ve üçgen oluşturma (MAT.8.3.2)',
+'3. Tema: Geometrik Şekiller — Üçgenlerde eşlik koşulları (MAT.8.3.3)',
+'3. Tema: Geometrik Şekiller — Üçgenlerde benzerlik koşulları (MAT.8.3.4)',
+'3. Tema: Geometrik Şekiller — Pisagor bağıntısı (MAT.8.3.5)',
+'3. Tema: Geometrik Şekiller — Üçgende açı-kenar ilişkisi, üçgen eşitsizliği ve Pisagor problemleri (MAT.8.3.6)',
+'4. Tema: Geometrik Nicelikler — Dik prizmalar, dikdörtgen dik piramit, silindir ve koni açınımları (MAT.8.4.1)',
+'4. Tema: Geometrik Nicelikler — Dik dairesel silindirin yüzey alanı (MAT.8.4.2)',
+'4. Tema: Geometrik Nicelikler — Dik dairesel silindirin hacmi (MAT.8.4.3)',
+'5. Tema: Dönüşüm — Öteleme dönüşümü ve görüntü özellikleri (MAT.8.5.1)',
+'5. Tema: Dönüşüm — Koordinat sisteminde öteleme ve yansıma dönüşümleri (MAT.8.5.2)',
+'5. Tema: Dönüşüm — Öteleme ve yansıma dönüşümü problemleri (MAT.8.5.3)',
+'6. Tema: İstatistiksel Araştırma Süreci — Kategorik ve nicel verilerle araştırma ve veriye dayalı karar verme (MAT.8.6.1)',
+'6. Tema: İstatistiksel Araştırma Süreci — İstatistiksel sonuç ve yorumları tartışma (MAT.8.6.2)',
+'7. Tema: Veriden Olasılığa — Öznel, deneysel ve teorik olasılık yaklaşımlarını seçme (MAT.8.7.1)'
+],lessons:[],schedules:[],exams:[],curriculum:{}}}catch(e){return {students:[],lessons:[],schedules:[],exams:[],curriculum:{}}}}
+function saveDB(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function fmtDate(v){if(!v)return '';return new Date(v).toLocaleDateString('tr-TR',{day:'numeric',month:'short',year:'numeric'})}
+function fmtDateTime(v){if(!v)return '';return new Date(v).toLocaleString('tr-TR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}
+function initials(s){return (s.firstName[0]||'')+(s.lastName[0]||'')}
+function studentName(s){return s.firstName+' '+s.lastName}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2500)}
+function showPage(name){currentPage=name;document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+name));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===name));if(name==='home'||name==='students'||name==='calendar'||name==='reports')currentStudent=null;renderAll();window.scrollTo(0,0)}
+function renderAll(){document.getElementById('statStudents').textContent=db.students.length;document.getElementById('statLessons').textContent=db.lessons.length;document.getElementById('statUpcoming').textContent=getUpcoming().length;document.getElementById('todayLabel').textContent=new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'long'});renderHome();renderStudents();renderCalendar();renderReports();if(currentStudent&&document.getElementById('page-student').classList.contains('active'))renderStudentDetail()}
+function openStudentForm(id=null){const s=db.students.find(x=>x.id===id);document.getElementById('studentForm').reset();document.getElementById('editStudentId').value=s?.id||'';document.getElementById('studentFormTitle').textContent=s?'Öğrenciyi düzenle':'Yeni öğrenci';if(s){firstName.value=s.firstName;lastName.value=s.lastName;parentName.value=s.parentName||'';parentPhone.value=s.parentPhone||'';grade.value=s.grade;studentNotes.value=s.notes||''}showPage('studentform')}
+document.getElementById('studentForm').addEventListener('submit',e=>{e.preventDefault();const id=editStudentId.value;const item={id:id||uid(),firstName:firstName.value.trim(),lastName:lastName.value.trim(),parentName:parentName.value.trim(),parentPhone:parentPhone.value.trim(),grade:grade.value,notes:studentNotes.value.trim()};if(id)db.students=db.students.map(s=>s.id===id?item:s);else db.students.push(item);currentStudent=item.id;saveDB();showPage('student');toast('Öğrenci kaydedildi')});
+function renderHome(){const today=new Date();const todays=getAllOccurrences(today,1);const box=document.getElementById('todayLessons');box.innerHTML=todays.length?todays.map(o=>scheduleCard(o,true)).join(''):'<div class="card empty"><div class="emoji">☀️</div><b>Bugün planlı ders yok</b><p class="smalltext">Takvimden düzenli veya telafi dersi ekleyebilirsin.</p></div>';const target=document.getElementById('homeStudents');target.innerHTML=db.students.length?'<div class="student-grid">'+db.students.slice(0,4).map(studentCard).join('')+'</div>':'<div class="card empty"><div class="emoji">📚</div><b>İlk öğrencini ekle</b><p class="smalltext">Öğrenci bilgilerini kaydet, ders ve konu takibine başla.</p><button class="btn" onclick="openStudentForm()">＋ Öğrenci ekle</button></div>'}
+function studentCard(s){let n=db.lessons.filter(l=>l.studentId===s.id).length;return `<div class="card" onclick="openStudent('${s.id}')" style="cursor:pointer"><div class="row"><div class="avatar">${esc(initials(s))}</div><div class="grow"><div class="student-name">${esc(studentName(s))}</div><div class="muted">${s.grade}. sınıf · ${n} ders kaydı</div></div><span>›</span></div></div>`}
+function renderStudents(){const q=(document.getElementById('studentSearch')?.value||'').toLocaleLowerCase('tr');const arr=db.students.filter(s=>studentName(s).toLocaleLowerCase('tr').includes(q));document.getElementById('studentsList').innerHTML=arr.length?arr.map(studentCard).join(''):'<div class="card empty">Henüz öğrenci yok veya aramana uygun sonuç bulunamadı.</div>'}
+function openStudent(id){currentStudent=id;currentPage='student';document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-student'));document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));renderStudentDetail();window.scrollTo(0,0)}
+function backToDetail(){if(currentStudent)openStudent(currentStudent);else showPage('students')}
+function topicsFor(s){return db.curriculum[s.grade]||DEFAULT_TOPICS[s.grade]||[]}
+function renderStudentDetail(){const s=db.students.find(x=>x.id===currentStudent);if(!s){showPage('students');return}const lessons=db.lessons.filter(l=>l.studentId===s.id).sort((a,b)=>b.date.localeCompare(a.date));const exams=db.exams.filter(e=>e.studentId===s.id).sort((a,b)=>a.date.localeCompare(b.date));const topics=topicsFor(s);const studied=[...new Set(lessons.map(l=>l.topic).filter(Boolean))];const mastered=new Set(lessons.filter(l=>l.rating==='İyi').map(l=>l.topic));const progress=topics.length?Math.round(studied.length/topics.length*100):0;const net=exams.length?exams[exams.length-1].total:0;
+let html=`<div class="card"><div class="row"><div class="avatar" style="width:54px;height:54px;font-size:20px">${esc(initials(s))}</div><div class="grow"><div class="student-name" style="font-size:20px">${esc(studentName(s))}</div><div class="muted">${s.grade}. sınıf · ${esc(s.parentName||'Veli adı eklenmemiş')}</div><span class="pill">${lessons.length} ders · ${studied.length} konu işlendi</span></div><button class="btn secondary small" onclick="openStudentForm('${s.id}')">Düzenle</button></div>${s.parentPhone?`<p class="smalltext">☎ ${esc(s.parentPhone)}</p>`:''}${s.notes?`<p class="smalltext">${esc(s.notes)}</p>`:''}</div>
+<div class="metricgrid"><div class="metric"><b>${lessons.length}</b><span>Kaydedilen ders</span></div><div class="metric"><b>${studied.length}</b><span>İşlenen farklı konu</span></div><div class="metric"><b>${lessons.filter(l=>l.homework==='Tamamlandı').length}</b><span>Tamamlanan ödev</span></div>${s.grade==='8'?`<div class="metric"><b>${exams.length?net.toFixed(2).replace('.',','):'—'}</b><span>Son deneme neti</span></div>`:`<div class="metric"><b>${progress}%</b><span>Konu kapsamı</span></div>`}</div>
+<div class="card topspace"><div class="section-head"><h2 style="font-size:16px">Konu ilerlemesi</h2><button class="btn small" onclick="openLessonForm('${s.id}')">＋ Ders kaydet</button></div><div class="progress"><i style="width:${progress}%"></i></div><p class="smalltext">${studied.length} / ${topics.length} tanımlı konu işlenmiş. Müfredat senin gönderdiğin güncel listeyle güncellenecek.</p>
+${topics.map(t=>{const ls=lessons.filter(l=>l.topic===t);const last=ls[0];let state=!last?'İşlenmedi':last.rating;return `<div class="itemline row between"><div class="grow"><div class="itemtitle">${esc(t)}</div><div class="muted">${last?'Son kayıt: '+fmtDate(last.date):'Henüz işlenmedi'}</div></div><span class="badge ${state==='İyi'?'good':state==='Tekrar edilmeli'?'bad':''}">${esc(state)}</span></div>`}).join('')}</div>
+<div class="card"><div class="section-head"><h2 style="font-size:16px">Ders geçmişi</h2><button class="btn small" onclick="openLessonForm('${s.id}')">＋ Ekle</button></div>${lessons.length?lessons.map(l=>`<div class="itemline"><div class="row between"><div class="itemtitle">${esc(l.topic||'Konu belirtilmedi')}</div><span class="badge ${l.rating==='İyi'?'good':l.rating==='Tekrar edilmeli'?'bad':''}">${esc(l.rating)}</span></div><div class="muted">${fmtDateTime(l.date)} · Ödev: ${esc(l.homework)}</div>${l.notes?`<p class="smalltext">${esc(l.notes)}</p>`:''}${l.nextHomework?`<p class="smalltext"><b>Ödev/sonraki ders:</b> ${esc(l.nextHomework)}</p>`:''}</div>`).join(''):'<p class="smalltext">Henüz ders kaydı yok.</p>'}</div>
+${s.grade==='8'?`<div class="card"><div class="section-head"><h2 style="font-size:16px">LGS deneme netleri</h2><button class="btn small" onclick="openExamForm('${s.id}')">＋ Deneme</button></div>${exams.length?`<canvas class="chart" id="netChart"></canvas><div class="smalltext">Net = doğru − yanlış / 3. Grafik toplam net değişimini gösterir.</div>${exams.slice().reverse().map(e=>`<div class="itemline"><div class="row between"><div><div class="itemtitle">${esc(e.name)}</div><div class="muted">${fmtDate(e.date)}</div></div><b>${e.total.toFixed(2).replace('.',',')} net</b></div><div class="smalltext">${SUBJECTS.map(sub=>`${sub}: ${e.subjects[sub].net.toFixed(2).replace('.',',')}`).join(' · ')}</div></div>`).join('')}`:'<p class="smalltext">Deneme eklediğinde ders bazında netler ve grafikler burada görünecek.</p>'}</div>`:''}
+<div class="card"><div class="section-head"><h2 style="font-size:16px">Ödev ve gelişim özeti</h2></div>${renderStudentSummary(lessons)}</div>
+<div class="inline-actions"><button class="btn secondary" onclick="openScheduleForm('${s.id}')">＋ Ders planla</button><button class="btn danger small" onclick="deleteStudent('${s.id}')">Öğrenciyi sil</button></div>`;
+document.getElementById('studentDetail').innerHTML=html;if(s.grade==='8'&&exams.length)drawNetChart(exams)}
+function renderStudentSummary(ls){if(!ls.length)return '<p class="smalltext">Değerlendirme oluşturmak için ders kaydı ekle.</p>';const ratings={'İyi':0,'Geliştirilmeli':0,'Tekrar edilmeli':0,'İşlenmedi':0};ls.forEach(l=>ratings[l.rating]=(ratings[l.rating]||0)+1);const hw={'Tamamlandı':0,'Kısmen tamamlandı':0,'Tamamlanmadı':0,'Ödev yoktu':0};ls.forEach(l=>hw[l.homework]=(hw[l.homework]||0)+1);return `<div class="smalltext">Konu değerlendirmeleri: ${Object.entries(ratings).map(([k,v])=>`${k}: ${v}`).join(' · ')}</div><div class="smalltext topspace">Ödev durumu: ${Object.entries(hw).map(([k,v])=>`${k}: ${v}`).join(' · ')}</div>`}
+function openLessonForm(id){currentStudent=id;lessonForm.reset();lessonStudentId.value=id;lessonDate.value=toLocalInput(new Date());const s=db.students.find(x=>x.id===id);lessonTopic.innerHTML='<option value="">Konu seç (isteğe bağlı)</option>'+topicsFor(s).map(t=>`<option>${esc(t)}</option>`).join('');showPage('lessonform')}
+document.getElementById('lessonForm').addEventListener('submit',e=>{e.preventDefault();db.lessons.push({id:uid(),studentId:lessonStudentId.value,date:lessonDate.value,topic:lessonTopic.value,rating:lessonRating.value,homework:lessonHomework.value,nextHomework:lessonNextHomework.value.trim(),notes:lessonNotes.value.trim()});saveDB();openStudent(lessonStudentId.value);toast('Ders değerlendirmesi kaydedildi')});
+function openExamForm(id){currentStudent=id;examForm.reset();examStudentId.value=id;examDate.value=new Date().toISOString().slice(0,10);examSubjects.innerHTML=SUBJECTS.map((s,i)=>`<div class="card"><b>${s}</b><div class="exam-grid topspace">${['Doğru','Yanlış','Boş'].map((k,j)=>`<div class="field"><label>${k}</label><input type="number" min="0" step="1" value="0" id="exam_${i}_${j}" oninput="updateExamTotal()"></div>`).join('')}</div><div class="muted topspace">Net: <b id="subnet_${i}">0,00</b></div></div>`).join('');showPage('examform');updateExamTotal()}
+function updateExamTotal(){let total=0;SUBJECTS.forEach((s,i)=>{let d=+(document.getElementById(`exam_${i}_0`)?.value||0),w=+(document.getElementById(`exam_${i}_1`)?.value||0),b=+(document.getElementById(`exam_${i}_2`)?.value||0);const n=d-w/3;total+=n;const el=document.getElementById(`subnet_${i}`);if(el)el.textContent=n.toFixed(2).replace('.',',');});document.getElementById('examTotal').textContent=total.toFixed(2).replace('.',',')}
+document.getElementById('examForm').addEventListener('submit',e=>{e.preventDefault();const subjects={};let total=0;for(let i=0;i<SUBJECTS.length;i++){const name=SUBJECTS[i],d=+document.getElementById(`exam_${i}_0`).value,w=+document.getElementById(`exam_${i}_1`).value,b=+document.getElementById(`exam_${i}_2`).value;const net=d-w/3;subjects[name]={correct:d,wrong:w,blank:b,net};total+=net}db.exams.push({id:uid(),studentId:examStudentId.value,name:examName.value.trim(),date:examDate.value,subjects,total});saveDB();openStudent(examStudentId.value);toast('Deneme sonucu kaydedildi')});
+function drawNetChart(exams){const c=document.getElementById('netChart');if(!c)return;const ctx=c.getContext('2d'),w=c.clientWidth||320,h=190,dpr=window.devicePixelRatio||1;c.width=w*dpr;c.height=h*dpr;ctx.scale(dpr,dpr);const pad={l:30,r:12,t:16,b:30},vals=exams.map(e=>e.total),max=Math.max(1,...vals),min=Math.min(0,...vals),x=i=>pad.l+(w-pad.l-pad.r)*(exams.length===1?.5:i/(exams.length-1)),y=v=>h-pad.b-(h-pad.t-pad.b)*(v-min)/(max-min||1);ctx.font='10px sans-serif';ctx.strokeStyle='#e8e6f1';ctx.fillStyle='#77758b';for(let j=0;j<4;j++){let v=min+(max-min)*j/3,yy=y(v);ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();ctx.fillText(v.toFixed(0),2,yy+3)}ctx.strokeStyle='#5b4bdb';ctx.lineWidth=2.5;ctx.beginPath();vals.forEach((v,i)=>i?ctx.lineTo(x(i),y(v)):ctx.moveTo(x(i),y(v)));ctx.stroke();vals.forEach((v,i)=>{ctx.fillStyle='#5b4bdb';ctx.beginPath();ctx.arc(x(i),y(v),4,0,Math.PI*2);ctx.fill();ctx.fillStyle='#77758b';ctx.fillText(exams[i].date.slice(5),x(i)-15,h-9)})}
+function openScheduleForm(studentId=''){scheduleForm.reset();scheduleTime.value='17:00';scheduleDuration.value=60;scheduleReminder.value='30';scheduleStudent.innerHTML=db.students.map(s=>`<option value="${s.id}">${esc(studentName(s))} (${s.grade}. sınıf)</option>`).join('');if(studentId)scheduleStudent.value=studentId;scheduleDate.value=new Date().toISOString().slice(0,10);toggleScheduleType();showPage('scheduleform')}
+function toggleScheduleType(){const once=scheduleType.value==='once';weekdayField.classList.toggle('hidden',once);dateField.classList.toggle('hidden',!once);scheduleDate.required=once}
+document.getElementById('scheduleForm').addEventListener('submit',e=>{e.preventDefault();const type=scheduleType.value;db.schedules.push({id:uid(),studentId:scheduleStudent.value,type,weekday:+scheduleWeekday.value,date:scheduleDate.value,time:scheduleTime.value,duration:+scheduleDuration.value,reminder:+scheduleReminder.value,notes:scheduleNotes.value.trim(),active:true});saveDB();showPage('calendar');toast('Ders takvime eklendi')});
+function getUpcoming(){return getAllOccurrences(new Date(),14).filter(o=>o.dateObj>=new Date()).sort((a,b)=>a.dateObj-b.dateObj)}
+function getAllOccurrences(start,days){const out=[];for(const sc of db.schedules.filter(s=>s.active)){const st=db.students.find(s=>s.id===sc.studentId);if(!st)continue;if(sc.type==='once'){const dt=new Date(sc.date+'T'+sc.time);if(dt>=start&&dt<=new Date(start.getTime()+days*86400000))out.push({...sc,student:st,dateObj:dt});}else{for(let i=0;i<days;i++){const dt=new Date(start);dt.setDate(start.getDate()+i);if(dt.getDay()===sc.weekday){const [hh,mm]=sc.time.split(':');dt.setHours(+hh,+mm,0,0);if(dt>=start)out.push({...sc,student:st,dateObj:dt})}}}}return out.sort((a,b)=>a.dateObj-b.dateObj)}
+function scheduleCard(o,compact=false){return `<div class="card"><div class="row"><div class="avatar" style="background:#e9f7f0;color:#21865a">◷</div><div class="grow"><div class="student-name">${esc(studentName(o.student))}</div><div class="muted">${fmtDateTime(o.dateObj.toISOString())} · ${o.duration} dk</div>${o.notes?`<div class="smalltext">${esc(o.notes)}</div>`:''}<span class="pill">${o.type==='once'?'Tek seferlik / telafi':'Haftalık düzenli'}</span></div><button class="btn danger small" onclick="deleteSchedule('${o.id}')">Sil</button></div></div>`}
+function renderCalendar(){const arr=getUpcoming();document.getElementById('calendarList').innerHTML=arr.length?arr.map(o=>scheduleCard(o)).join(''):'<div class="card empty"><div class="emoji">🗓️</div><b>Yaklaşan ders bulunmuyor</b><p class="smalltext">Ders planlayarak takvimini oluştur.</p></div>'}
+function deleteSchedule(id){if(confirm('Bu ders planını silmek istiyor musun?')){db.schedules=db.schedules.filter(s=>s.id!==id);saveDB()}}
+function deleteStudent(id){if(!confirm('Öğrenciyi ve bu öğrenciye ait ders, deneme ve takvim kayıtlarını silmek istiyor musun? Bu işlem geri alınamaz.'))return;db.students=db.students.filter(s=>s.id!==id);db.lessons=db.lessons.filter(x=>x.studentId!==id);db.exams=db.exams.filter(x=>x.studentId!==id);db.schedules=db.schedules.filter(x=>x.studentId!==id);currentStudent=null;saveDB();showPage('students');toast('Öğrenci silindi')}
+function renderReports(){const done=db.lessons.filter(l=>l.homework==='Tamamlandı').length,hw=db.lessons.filter(l=>l.homework!=='Ödev yoktu').length,rate=hw?Math.round(done/hw*100):0;const top=db.lessons.reduce((a,l)=>(a[l.rating]=(a[l.rating]||0)+1,a),{});document.getElementById('reportContent').innerHTML=`<div class="metricgrid"><div class="metric"><b>${db.students.length}</b><span>Aktif öğrenci</span></div><div class="metric"><b>${db.lessons.length}</b><span>Toplam ders kaydı</span></div><div class="metric"><b>${rate}%</b><span>Ödev tamamlama oranı</span></div><div class="metric"><b>${db.exams.length}</b><span>Deneme kaydı</span></div></div><div class="card topspace"><div class="itemtitle">Konu değerlendirmeleri</div>${Object.keys(top).length?Object.entries(top).map(([k,v])=>`<div class="itemline row between"><span>${esc(k)}</span><b>${v}</b></div>`).join(''):'<p class="smalltext">Henüz değerlendirme yok.</p>'}</div><div class="card"><div class="itemtitle">Öğrenci bazında ilerleme</div>${db.students.length?db.students.map(s=>{const ls=db.lessons.filter(l=>l.studentId===s.id),good=ls.filter(l=>l.rating==='İyi').length;return `<div class="itemline"><div class="row between"><b>${esc(studentName(s))}</b><span class="muted">${ls.length} ders</span></div><div class="progress"><i style="width:${ls.length?good/ls.length*100:0}%"></i></div><div class="smalltext">${good} ders değerlendirmesi “İyi” · ${ls.filter(l=>l.homework==='Tamamlandı').length} tamamlanan ödev</div></div>`}).join(''):'<p class="smalltext">Öğrenci eklediğinde analiz burada oluşur.</p>'}</div>`}
+function toLocalInput(d){const z=new Date(d.getTime()-d.getTimezoneOffset()*60000);return z.toISOString().slice(0,16)}
+function exportData(){const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ders-takip-yedek-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href);toast('Yedek dosyası indiriliyor')}
+function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!Array.isArray(x.students)||!Array.isArray(x.lessons))throw Error();if(confirm('Mevcut verilerin yerine yedek yüklensin mi?')){db={students:x.students,lessons:x.lessons||[],schedules:x.schedules||[],exams:x.exams||[],curriculum:x.curriculum||{}};saveDB();toast('Yedek yüklendi')}}catch(err){alert('Yedek dosyası okunamadı.')}e.target.value=''};r.readAsText(f)}
+document.getElementById('notifyBtn').addEventListener('click',async()=>{if(!('Notification'in window)){toast('Bu tarayıcı bildirimleri desteklemiyor.');return}try{const p=await Notification.requestPermission();toast(p==='granted'?'Bildirim izni verildi. Hatırlatmalar için uygulamayı kurulu tut.':'Bildirim izni verilmedi.')}catch(e){toast('Bildirim izni alınamadı.')}});
+if('serviceWorker'in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+renderAll();
+</script>
+</body>
+</html>
