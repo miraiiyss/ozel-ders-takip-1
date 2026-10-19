@@ -110,6 +110,21 @@ input,select,textarea{width:100%;border:1px solid var(--line);border-radius:11px
 </nav>
 <div id="toast" class="toast hidden"></div>
 <script>
+// Explicit DOM references for iOS Safari compatibility.
+const firstName=document.getElementById('firstName'), lastName=document.getElementById('lastName'),
+parentName=document.getElementById('parentName'), parentPhone=document.getElementById('parentPhone'),
+grade=document.getElementById('grade'), studentNotes=document.getElementById('studentNotes'),
+editStudentId=document.getElementById('editStudentId'), lessonStudentId=document.getElementById('lessonStudentId'),
+lessonDate=document.getElementById('lessonDate'), lessonTopic=document.getElementById('lessonTopic'),
+lessonRating=document.getElementById('lessonRating'), lessonHomework=document.getElementById('lessonHomework'),
+lessonNextHomework=document.getElementById('lessonNextHomework'), lessonNotes=document.getElementById('lessonNotes'),
+examStudentId=document.getElementById('examStudentId'), examName=document.getElementById('examName'),
+examDate=document.getElementById('examDate'), scheduleType=document.getElementById('scheduleType'),
+scheduleStudent=document.getElementById('scheduleStudent'), scheduleWeekday=document.getElementById('scheduleWeekday'),
+scheduleDate=document.getElementById('scheduleDate'), scheduleTime=document.getElementById('scheduleTime'),
+scheduleDuration=document.getElementById('scheduleDuration'), scheduleReminder=document.getElementById('scheduleReminder'),
+scheduleNotes=document.getElementById('scheduleNotes');
+
 const KEY='dersTakip_v1';
 const SUBJECTS=['Türkçe','Matematik','Fen Bilimleri','İnkılap Tarihi','Din Kültürü','İngilizce'];
 const WEEKDAYS=['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
@@ -177,31 +192,10 @@ const DEFAULT_TOPICS={
 '6. Tema: Veriden Olasılığa — Deneysel olasılık ve göreli sıklık (MAT.6.6.1)'
 ],
 '7':['Tam sayılarla işlemler','Rasyonel sayılar','Rasyonel sayılarla işlemler','Cebirsel ifadeler','Eşitlik ve denklem','Oran ve orantı','Yüzdeler','Doğrular ve açılar','Çokgenler','Çember ve daire','Veri analizi'],
-'8':[
-'1. Tema: Sayılar ve Nicelikler — Üslü ifadeler ve özellikleriyle işlemler (MAT.8.1.1)',
-'1. Tema: Sayılar ve Nicelikler — Kareköklü ifadeler ve yaklaşık değerleri (MAT.8.1.2)',
-'1. Tema: Sayılar ve Nicelikler — Rasyonel ve irrasyonel sayılar (MAT.8.1.3)',
-'1. Tema: Sayılar ve Nicelikler — Gerçek sayılar ve sayı aralıkları (MAT.8.1.4)',
-'2. Tema: Cebirsel Düşünme ve Değişimler — Dik koordinat sistemi ve sıralı ikililer (MAT.8.2.1)',
-'2. Tema: Cebirsel Düşünme ve Değişimler — Doğrusal ilişkiler ve doğrusal fonksiyonlar (MAT.8.2.2)',
-'2. Tema: Cebirsel Düşünme ve Değişimler — Doğrusal fonksiyonların grafikleri, eğim ve doğruların konumları (MAT.8.2.3)',
-'2. Tema: Cebirsel Düşünme ve Değişimler — Doğrusal fonksiyon problemleri ve algoritmalar (MAT.8.2.4)',
-'3. Tema: Geometrik Şekiller — Üçgende kenar-açı ilişkisi (MAT.8.3.1)',
-'3. Tema: Geometrik Şekiller — Üçgen eşitsizliği ve üçgen oluşturma (MAT.8.3.2)',
-'3. Tema: Geometrik Şekiller — Üçgenlerde eşlik koşulları (MAT.8.3.3)',
-'3. Tema: Geometrik Şekiller — Üçgenlerde benzerlik koşulları (MAT.8.3.4)',
-'3. Tema: Geometrik Şekiller — Pisagor bağıntısı (MAT.8.3.5)',
-'3. Tema: Geometrik Şekiller — Üçgende açı-kenar ilişkisi, üçgen eşitsizliği ve Pisagor problemleri (MAT.8.3.6)',
-'4. Tema: Geometrik Nicelikler — Dik prizmalar, dikdörtgen dik piramit, silindir ve koni açınımları (MAT.8.4.1)',
-'4. Tema: Geometrik Nicelikler — Dik dairesel silindirin yüzey alanı (MAT.8.4.2)',
-'4. Tema: Geometrik Nicelikler — Dik dairesel silindirin hacmi (MAT.8.4.3)',
-'5. Tema: Dönüşüm — Öteleme dönüşümü ve görüntü özellikleri (MAT.8.5.1)',
-'5. Tema: Dönüşüm — Koordinat sisteminde öteleme ve yansıma dönüşümleri (MAT.8.5.2)',
-'5. Tema: Dönüşüm — Öteleme ve yansıma dönüşümü problemleri (MAT.8.5.3)',
-'6. Tema: İstatistiksel Araştırma Süreci — Kategorik ve nicel verilerle araştırma ve veriye dayalı karar verme (MAT.8.6.1)',
-'6. Tema: İstatistiksel Araştırma Süreci — İstatistiksel sonuç ve yorumları tartışma (MAT.8.6.2)',
-'7. Tema: Veriden Olasılığa — Öznel, deneysel ve teorik olasılık yaklaşımlarını seçme (MAT.8.7.1)'
-],lessons:[],schedules:[],exams:[],curriculum:{}}}catch(e){return {students:[],lessons:[],schedules:[],exams:[],curriculum:{}}}}
+'8':['Üslü ifadeler','Kareköklü ifadeler','Gerçek sayılar','Doğrusal ilişkiler ve fonksiyonlar','Üçgenler ve Pisagor bağıntısı','Silindirin yüzey alanı ve hacmi','Öteleme ve yansıma','İstatistiksel araştırma','Olasılık']
+};
+let db;
+try { db=JSON.parse(localStorage.getItem(KEY)) || {students:[],lessons:[],schedules:[],exams:[],curriculum:{}}; } catch(e) { db={students:[],lessons:[],schedules:[],exams:[],curriculum:{}}; }
 function saveDB(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
 function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}

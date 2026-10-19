@@ -41,3 +41,5 @@ Arayüz bildirim izni isteyebilir; ancak bu MVP, ders saatlerini arka planda kon
 
 8. sınıf listesi, MEB'in resmî 8. sınıf programındaki yedi tema ve MAT.8 öğrenme çıktılarının kısa takip başlıklarıyla güncellenmiştir: https://tymm.meb.gov.tr/ogretim-programlari/ortaokul-matematik-dersi/9
 Bu liste kısa takip başlıklarını içerir; tüm süreç bileşenleri henüz uygulamaya aktarılmamıştır.
+
+Sürüm 7 düzeltmesi: JavaScript sözdizimi hatası giderildi ve iOS Safari uyumluluğu için form alanları açık DOM referanslarıyla bağlandı.
